@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="/error/P144.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파라미터 출력</title>
+<title>NULL 에러 발생</title>
 </head>
 <body>
 
-name 파라미터 값: <%= request.getParameter("name").toUpperCase() %>
-
+<strong>서비스 처리 과정에서 널(NULL) 에러가 발생하였습니다.</strong>
 </body>
 </html>
