@@ -28,7 +28,7 @@
 		// 4단계 - 쿼리실행
 		// SELECT 경우 -> executeQuert() 실행
 		// INSERT, UPDATE, DELETE 경우 -> executeUpdate() 실행
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `USER`;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `USER` ;");
 	
 	
 	
@@ -59,7 +59,9 @@
 		
 	} finally{
 	// 6단계 - 데이터베이스 종료
+	
 	conn.close();
+	
 	}
 %>
 <!DOCTYPE html>
@@ -96,12 +98,13 @@
 		<td><%= user.getPos() %></td>
 		<td><%= user.getDep() %></td>
 		<td><%= user.getRdate().substring(2, 10) %></td>
-		<td><a href ="#">수정</a></td>
-		<td><a href ="#">삭제</a></td>
+		<td><a href ="./14-5.jsp?seq=<%= user.getSeq() %>">수정</a></td>
+		<td><a href="./14-4.jsp?seq=<%= user.getSeq() %>">삭제</a></td>
 	</tr>
 	<%
 		}
 	%>
 	</table>
+	<a href="./14-1.jsp">직원등록</a>	
 </body>
 </html>
