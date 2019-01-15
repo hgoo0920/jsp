@@ -1,23 +1,143 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>회원가입</title>
 		<link rel="stylesheet" href="./css/style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$(function(){
+			
+			$('input[name=uid]').focusout(function(){
+			
+			var tag = $(this);
+			var uid = tag.val();
+			
+			$.ajax({
+			
+				url: './proc/checkUid.jsp?uid='+uid,
+				type: 'get',
+				dataType: 'json',
+				
+				success: function(data){
+					
+					if(data.result == 1) {
+						
+						$('.resultId').css('color', 'red').text("이미 사용중인 아이디 입니다.");
+						tag.focus();
+					}else{
+						$('.resultId').css('color', 'green').text("사용 가능한 아이디 입니다.");
+					}
+				}
+			});
+			});
+			
+			//이름 중복체크
+			$('input[name=name]').focusout(function(){
+				
+				var tag = $(this);
+				var name = tag.val();
+				
+				$.ajax({
+					
+					url: './proc/checkName.jsp?name='+name,
+							type: 'get',
+							dataType: 'json',
+							
+							success:function(data) {
+								if(data.result == 1) {
+									
+									
+								}
+							}
+				})
+			})
+			//닉네임 중복체크
+			$('input[name=nick]').focusout(function(){ 
+				
+				var tag = $(this);
+				var nick = tag.val();
+				
+				$.ajax({
+					
+					url: './proc/checkNick.jsp?nick='+nick,
+					type: 'get',
+					dataType: 'json',
+					
+					success:function(data) {
+						if(data.result == 1) {
+							
+							$('.resultNick').css('color', 'red').text("이미 사용중인 닉네임 입니다.");
+							tag.focus();
+						}else{
+							$('.resultNick').css('color', 'green').text("사용 가능한 닉네임 입니다.");
+						}
+					}
+				});
+				});
+
+			//이메일 중복체크
+			$('input[name=email]').focusout(function(){ 
+				
+				var tag = $(this);
+				var email = tag.val();
+				
+				$.ajax({
+					
+					url: './proc/checkEmail.jsp?email='+email,
+					type: 'get',
+					dataType: 'json',
+					
+					success:function(data) {
+						if(data.result == 1) {
+							
+							$('.resultEmail').css('color', 'red').text("이미 사용중인 이메일 입니다.");
+							tag.focus();
+						}else{
+							$('.resultEmail').css('color', 'green').text("사용 가능한 이메일 입니다.");
+						}
+					}
+				});
+				});
+			
+			//휴대폰 중복체크
+			$('input[name=hp]').focusout(function(){ 
+				
+				var tag = $(this);
+				var hp = tag.val();
+				
+				$.ajax({
+					
+					url: './proc/checkHp.jsp?hp='+hp,
+					type: 'get',
+					dataType: 'json',
+					
+					success:function(data) {
+						if(data.result == 1) {
+							
+							$('.resultHp').css('color', 'red').text("이미 사용중인 번호 입니다.");
+							tag.focus();
+						}else{
+							$('.resultHp').css('color', 'green').text("사용 가능한 번호 입니다.");
+						}
+					}
+				});
+				});
+		});
+		</script>
 	</head>
 	<body>
 		<div id="member">
 			<section class="register">
-				<form action="#" method="POST">
+				<form action="./proc/register.jsp" method="POST">
 					<section>
 						<table>
 							<caption>사이트 이용정보 입력</caption>
 							<tr>
 								<td>아이디</td>
 								<td>
-									<input type="text" name="id" placeholder="아이디를 입력" required />
+									<input type="text" name="uid" placeholder="아이디를 입력" required />
 									<span class="resultId"></span>
 								</td>
 							</tr>
